@@ -5,14 +5,28 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+Post.destroy_all
 
+# post_list = [
+#   ["Rick is an old man", 1, "Rick is too old and drunk all the time"],
+#   ["Morty is a little bitch", 2, "This is not Rick, morty is a little bitch"],
+#   ["Summer", 3, "She is supper annoying"]
+# ]
 
-post_list = [
-  ["Rick is an old man", 1, "Rick is too old and drunk all the time"],
-  ["Morty is a little bitch", 2, "This is not Rick, morty is a little bitch"],
-  ["Summer", 3, "She is supper annoying"]
+user_list = [
+  ["mark@mark.com", "Mark", "111111"],
+  ["aaron@aaro.com", "Aaron", "111111"],
+  ["javi@javi.com", "Javi", "111111"]
 ]
 
-post_list.each do |title, user_id, content|
-  Post.create(title: title, user_id: user_id, content: content)
+user_list.each do |email, username, password|
+  User.create!(email: email, username: username, password: password)
+end
+
+50.times do |index|
+  Post.create!(title: Faker::Hipster.sentence,
+                        content: Faker::Hipster.paragraph,
+                        user_id: User.last.id
+                        )
 end
