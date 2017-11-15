@@ -19,7 +19,8 @@ end
 
 def show
   @post = Post.find(params[:id])
-  @comment = @post.comments.new
+  @comments = @post.comments
+  # @comment = @post.comments.new
 
 end
 
@@ -39,7 +40,7 @@ end
 
 private
   def post_params
-    params.require(:post).permit(:title, :posted_by, :url)
+    params.require(:post).permit(:title, :content, :user_id)
   end
 
 end

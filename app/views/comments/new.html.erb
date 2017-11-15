@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.hidden_field(:user_id, :value => current_user.id) %>
+
+  <%= f.submit %>
+<% end %>

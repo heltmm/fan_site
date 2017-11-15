@@ -1,0 +1,14 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.user.username %></p>
+
+<p><%= @post.content %></p>
+
+<% if @comments.any? %>
+<% @comments.each do |comment| %>
+  <p><%=comment.content %></p>
+  <p> - <%= comment.user.username %></p>
+  <%end%>
+  <%= link_to 'Add a comment', new_post_comment_path(@post) %>
+<%else%>
+  <%= link_to 'Make a comment, taint nun!', new_post_comment_path(@post) %>
+<%end%>
