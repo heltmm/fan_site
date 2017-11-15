@@ -1,0 +1,6 @@
+<% if current_user %>
+<h1><%= current_user.username %></h1>
+<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+<%end%>
+<%= link_to('Login', new_user_session_path)  %>
+<%= link_to('Register', new_user_registration_path)  %>
