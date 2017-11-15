@@ -7,11 +7,11 @@
   <% @posts.each do |post| %>
     <li><%= link_to post.title, post_path(post) %></li>
     <%= link_to like_post_path(post), method: :put do %>
-        Upvote
+        <%= image_tag "up.png", :class => "icon" %>
     <%= post.get_upvotes.size %>
   <% end %>
   <%= link_to dislike_post_path(post), method: :put do %>
-      Downvote
+      <%= image_tag "down.png", :class => "icon" %>
   <%= post.get_downvotes.size %>
 <% end %>
 
