@@ -1,26 +1,23 @@
 
-<h1>Posts</h1>
+<% if !current_user %>
+  <h1>Please Log in to Post</h1>
+  <h2><%= link_to('Login', new_user_session_path)  %></h2>
+  <h2><%= link_to('Register', new_user_registration_path)  %></h2>
+<% else %>
+  <h1><%= link_to "New Post", new_post_path %></h1>
+<% end %>
+
 
 <ul>
-  <% if current_user %>
-
-    <% @posts.each do |post| %>
-      <li><%= link_to post.title, post_path(post) %><br>Started: <%=post.created_at.strftime("%m/%d/%Y") %><br>- <%=post.user.username%></li>
-      <%= link_to like_post_path(post), method: :put do %>
-          <%= image_tag "up.png", :class => "icon" %>
+  <% @posts.each do |post| %>
+    <li><%= link_to post.title, post_path(post) %><br>Started: <%=post.created_at.strftime("%m/%d/%Y") %><br>- <%=post.user.username%></li>
+    <%= link_to like_post_path(post), method: :put do %>
+      <%= image_tag "up.png", :class => "icon" %>
       <%= post.get_upvotes.size %>
     <% end %>
     <%= link_to dislike_post_path(post), method: :put do %>
-        <%= image_tag "down.png", :class => "icon" %>
-    <%= post.get_downvotes.size %>
-    <% end %>
-  <% end %><br>
-  <%= link_to "New Post", new_post_path %>
-  <% else %>
-  <h1>Please Log in to view</h1>
-   <%= link_to('Login', new_user_session_path)  %>
-   <%= link_to('Register', new_user_registration_path)  %>
+      <%= image_tag "down.png", :class => "icon" %>
+      <%= post.get_downvotes.size %>
+      <% end %>
   <% end %>
 </ul>
-
-<hr>
