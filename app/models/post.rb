@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   acts_as_votable
 
-  scope :twenty_most_recent, -> { order(created_at: :desc).limit(20)}
+  scope :most_recent, -> (page_num) { order(created_at: :desc).limit(20).offset((page_num.to_i * 20) - 20)}
 
   scope :search, -> (search_parameter) { where("title like ? OR content like ?", "%#{search_parameter}%", "%#{search_parameter}%")}
 end

@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.twenty_most_recent
+    @posts = Post.most_recent(params[:page]) if params[:page].present?
+    @posts = Post.most_recent(1) if !params[:page].present?
     @posts = @posts.search(params[:search]) if params[:search].present?
   end
 
