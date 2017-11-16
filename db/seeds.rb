@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
 Post.destroy_all
-Comment.destry_all
+Comment.destroy_all
 
 # post_list = [
 #   ["Rick is an old man", 1, "Rick is too old and drunk all the time"],
@@ -25,24 +25,37 @@ user_list.each do |email, username, password|
   User.create!(email: email, username: username, password: password)
 end
 
-20.times do |index|
+40.times do |user|
   User.create!(email: Faker::Internet.email,
                         username: Faker::GameOfThrones.character,
                         password: "password")
 end
 
-50.times do |index|
-  Post.create!(title: Faker::Hipster.sentence,
+100.times do |index|
+  current_post = Post.create!(title: Faker::Hipster.sentence,
                         content: Faker::Hipster.paragraph,
                         user_id: Faker::Number.between(User.first.id, User.last.id)
                         )
+
 end
 
-50.times do |index|
+200.times do |index|
   Comment.create!(content: Faker::Hipster.paragraph,
                         user_id: Faker::Number.between(User.first.id, User.last.id),
                         post_id: Faker::Number.between(Post.first.id, Post.last.id)
                         )
+end
+
+# seed votes
+users = User.all
+
+users.each do |user|
+  6.times do
+    current_post = Post.find(Faker::Number.between(Post.first.id, Post.last.id))
+    current_post.vote_by :voter => user, :vote => 'like'
+  end
+  current_post = Post.find(Faker::Number.between(Post.first.id, Post.last.id))
+  current_post.vote_by :voter => user, :vote => 'bad'
 end
 
 p "Created #{User.count} users"
