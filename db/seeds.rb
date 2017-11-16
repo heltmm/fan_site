@@ -27,6 +27,6 @@ end
 50.times do |index|
   Post.create!(title: Faker::Hipster.sentence,
                         content: Faker::Hipster.paragraph,
-                        user_id: User.last.id
+                        user_id: Faker::Number.between(User.first.id, User.last.id)
                         )
 end

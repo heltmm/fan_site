@@ -3,28 +3,24 @@
 
 <ul>
   <% if current_user %>
-  <h1><%= current_user.username %></h1>
 
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
-  <% @posts.each do |post| %>
-    <li><%= link_to post.title, post_path(post) %></li>
-    <%= link_to like_post_path(post), method: :put do %>
-        <%= image_tag "up.png", :class => "icon" %>
-    <%= post.get_upvotes.size %>
-  <% end %>
-  <%= link_to dislike_post_path(post), method: :put do %>
-      <%= image_tag "down.png", :class => "icon" %>
-  <%= post.get_downvotes.size %>
-<% end %>
-
+    <% @posts.each do |post| %>
+      <li><%= link_to post.title, post_path(post) %></li>
+      <%= link_to like_post_path(post), method: :put do %>
+          <%= image_tag "up.png", :class => "icon" %>
+      <%= post.get_upvotes.size %>
+    <% end %>
+    <%= link_to dislike_post_path(post), method: :put do %>
+        <%= image_tag "down.png", :class => "icon" %>
+    <%= post.get_downvotes.size %>
+    <% end %>
+  <%= link_to "New Post", new_post_path %>
   <% end %>
   <% else %>
-  <h1>LOG IN, WHAT ARE YOU NEW?</h1>
+  <h1>Please Log in to view</h1>
    <%= link_to('Login', new_user_session_path)  %>
    <%= link_to('Register', new_user_registration_path)  %>
   <% end %>
 </ul>
 
 <hr>
-
-<%= link_to "New Post", new_post_path %>
