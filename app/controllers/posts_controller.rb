@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.twenty_most_recent
+    @posts = @posts.search(params[:search]) if params[:search].present?
   end
 
   def new
