@@ -5,7 +5,7 @@
   <% if current_user %>
 
     <% @posts.each do |post| %>
-      <li><%= link_to post.title, post_path(post) %><br>Started: <%=post.created_at %><br>By: <%=post.user.username%></li>
+      <li><%= link_to post.title, post_path(post) %><br>Started: <%=post.created_at.strftime("%m/%d/%Y") %><br>- <%=post.user.username%></li>
       <%= link_to like_post_path(post), method: :put do %>
           <%= image_tag "up.png", :class => "icon" %>
       <%= post.get_upvotes.size %>
