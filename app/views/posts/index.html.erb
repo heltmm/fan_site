@@ -1,5 +1,6 @@
-
+<%if @posts.length > 0 %>
 <a href="?page=<%= params[:page] ? params[:page].to_i + 1 : 2 %>">Next Page</a>
+<% end %>
 <ul>
   <% @posts.each do |post| %>
     <li><%= link_to post.title, post_path(post) %><br>Started: <%=post.created_at.strftime("%m/%d/%Y") %><br>- <%=post.user.username%></li>
